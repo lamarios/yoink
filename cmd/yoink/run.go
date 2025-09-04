@@ -84,6 +84,11 @@ func (r *RunCmd) Run(ctx *Context) error {
 			continue
 		}
 
+		// Filter out torrents that would exceed the total space limit
+		if downloadSize+uint64(prTorrent.Size) > spaceLeft {
+			continue
+		}
+
 		downloadSize += uint64(prTorrent.Size)
 		filteredResults = append(filteredResults, prTorrent)
 	}
