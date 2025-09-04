@@ -5,3 +5,7 @@ config.yaml
 /yoink.exe
 /coverage.txt
 /dist
+# Task installation artifacts
+task_linux_amd64.tar.gz
+task
+completion/
