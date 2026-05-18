@@ -56,7 +56,7 @@ func (c *Client) Login(username, password string) error {
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
+	if resp.StatusCode < http.StatusOK || resp.StatusCode > http.StatusIMUsed {
 		return fmt.Errorf("bad status: %s", resp.Status)
 	}
 	// check if login was successful
@@ -74,7 +74,7 @@ func (c *Client) GetTorrents() ([]Torrent, error) {
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
+	if resp.StatusCode < http.StatusOK || resp.StatusCode > http.StatusIMUsed {
 		return nil, err
 	}
 
@@ -98,7 +98,7 @@ func (c *Client) AddTorrentFromURL(urls string, options map[string]string) error
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
+	if resp.StatusCode < http.StatusOK || resp.StatusCode > http.StatusIMUsed {
 		return err
 	}
 
@@ -131,7 +131,7 @@ func (c *Client) AddTorrentFromBuffer(file *bytes.Buffer, fileName string, optio
 	}
 	defer resp.Body.Close()
 
-	if resp.StatusCode != http.StatusOK {
+	if resp.StatusCode < http.StatusOK || resp.StatusCode > http.StatusIMUsed {
 		return err
 	}
 
